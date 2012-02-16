@@ -1,8 +1,8 @@
-== timeago
+= timeago
 
 to use this gem, just require and run it, like this:
 
-= Example 1
+== Example 1
 
 > require 'timeago' 
 >
@@ -13,7 +13,7 @@ to use this gem, just require and run it, like this:
 and it should output 
 > one minute ago
 
-= Example 2
+== Example 2
 
 > require 'timeago' 
 >

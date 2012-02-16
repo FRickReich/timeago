@@ -2,7 +2,7 @@
 
 to use this gem, just require and run it, like this:
 
-== Example 1
+==== Example 1
 
 > require 'timeago' 
 >
@@ -13,7 +13,7 @@ to use this gem, just require and run it, like this:
 and it should output 
 > one minute ago
 
-== Example 2
+==== Example 2
 
 > require 'timeago' 
 >
@@ -26,6 +26,6 @@ this should output
 
 this can go up to 5 years ago, after that it will change to the exact date.
 
-== Copyright
+
 
 Copyright (c) 2012 Frederik Reich.

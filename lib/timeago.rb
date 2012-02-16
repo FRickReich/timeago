@@ -16,7 +16,6 @@ class TimeAgo
     
     distance = distance_of_time_in_words(delta_setting)
     return "#{distance} ago"
-
     if rightnow.to_i == backthen.to_i
       "just now"
     elsif delta_minutes.abs <= (8724*60)       

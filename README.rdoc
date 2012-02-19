@@ -22,6 +22,10 @@ this should output
   
 this can go up to 5 years ago, after that it will change to the exact date.  
   
-  
+== Todo
+
+- build ability to change max - time
+- add seconds
+- add language options?
   
 Copyright (c) 2012 Frederik Reich.

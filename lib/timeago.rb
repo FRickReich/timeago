@@ -1,61 +1,67 @@
 require 'date'
 
-class TimeAgo
-  class << TimeAgo
-    def right_now
-      time = Time.new
-    	time.strftime("%I:%M:%S %p")
+module TimeAgo
+  def relative_time
+    raise "This isn't a Time like class. I can't calculate the relative time" unless respond_to? :to_time
+    rightnow = Time.new
+    backthen = to_time
+
+    delta_setting = (rightnow.to_i - backthen.to_i).floor
+  
+    distance = distance_of_time_in_words(delta_setting)
+  end
+
+private
+
+  def distance_of_time_in_words(seconds)
+    case
+    when seconds < 25.seconds
+      "a few seconds ago"
+    when seconds < 31.seconds
+      "half a minute ago"
+    when seconds < 1.minute
+      "less than a minute ago"
+    when seconds < 2.minutes
+      "one minute ago"
+    when seconds < 45.minutes
+      "#{seconds/1.minute} minutes ago"
+    when seconds < 59.minutes
+      "less than one hour ago"
+    when seconds < 120.minutes
+      "one hour ago"
+    when seconds < 18.hours
+      "#{(seconds / 1.hour).round} hours ago"
+    when seconds < 48.hours
+      "yesterday"
+    when seconds < 6.days
+      "#{(seconds / 1.day).round} days ago"
+    when seconds < 1.week
+      "one week ago"
+    when seconds < 28.days
+      "#{(seconds / 1.week).round} weeks ago"
+    when seconds < 30.days
+      "one month ago"
+    when seconds < 364.days
+      "#{(seconds / 1.month).round} months ago"
+    when seconds <= 365.days
+      "one year ago"
+    when seconds < 5.years
+      "#{(seconds / 1.year).round} years ago"
+    else
+      "#{seconds / 1.minute} minutes ago"
     end
+  end
 
-    def readable(time)
+end
 
-      rightnow = Time.new
-      backthen = time
+class Time
+  include TimeAgo
+end
 
-      delta_setting = (rightnow.to_i - backthen.to_i).floor / 60
-    
-      distance = distance_of_time_in_words(delta_setting)
-      return "#{distance} ago"
+if Object.const_defined? :ActiveSupport
+  module ActiveSupport
+    class TimeWithZone
+      include TimeAgo
     end
-	
-    def distance_of_time_in_words(minutes)
-      case
-      when minutes < 0.4
-        "a few seconds"
-      when minutes < 0.6
-        "half a minute"
-      when minutes < 1
-        "less than a minute"
-      when minutes < 2
-        "one minute"
-      when minutes < 45
-        "#{minutes} minutes"
-      when minutes < 59
-        "less than one hour"
-      when minutes < 120
-        "one hour"
-      when minutes < 1080
-        "#{(minutes / 60).round} hours"
-      when minutes < 2880
-        "yesterday"
-      when minutes < 8640
-        "#{(minutes / 1440).round} days"
-      when minutes < 10080
-        "one week"
-      when minutes < 40320
-        "#{(minutes / 8640).round} weeks"
-      when minutes < 43200
-        "one month"
-      when minutes < 525580
-        "#{(minutes / 43200).round} months"
-      when minutes < 525600
-        "one year"
-      when minutes < 2628000
-        "#{(minutes / 525600).round} years"
-      else
-        "#{minutes} minutes"
-      end
-    end
-
   end
 end

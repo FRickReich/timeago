@@ -6,7 +6,7 @@ to use this gem, just require and run it, like this:
   
  require 'timeago'  
  time = Time.now - 60    
- Timeago.readable(time)    
+ TimeAgo.readable(time)    
   
 and it should output  
  one minute ago  
@@ -15,7 +15,7 @@ and it should output
   
  require 'timeago'   
  time = Time.now - 13250  
- Timeago.readable(time)  
+ TimeAgo.readable(time)  
   
 this should output  
  3 hours ago  
